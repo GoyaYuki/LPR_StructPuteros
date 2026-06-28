@@ -1,39 +1,59 @@
 #include <iostream>
 #include <cstring>
 using namespace std;
-// 1. DEFINI TU ESTRUCTURA (Debe tener minimo 3 campos: un entero, un char[] y un float)
-struct EntidadProyecto {
-int id;
-char nombre[50];
-float metrica; // Puede ser precio, temperatura, puntaje, etc.
+
+// Estructura que representa un socio de la cooperadora
+struct Socio {
+    int id;              // Identificador del socio
+    char nombre[50];     // Nombre del socio
+    float cuota;         // Monto de la cuota que paga
 };
-// 2. FUNCION MODULAR (Usa el operador flecha -> para cargar datos)
-void cargarDatos(EntidadProyecto* ptr) {
-cout << "\n--- CARGA DE DATOS ASINCRONICA ---" << endl;
-cout << "Ingrese el ID (entero): ";
-cin >> ptr->id;
-// Limpieza de buffer para evitar saltos de linea
-cin.ignore();
-cout << "Ingrese el Nombre (texto): ";
-cin.getline(ptr->nombre, 50);
-cout << "Ingrese la Metrica (decimal/float): ";
-// COMPLETAR: Usa el operador flecha '->' para leer la metrica usando 'cin >>'
+
+// Función para cargar los datos del socio
+// Se recibe un puntero a la estructura y se usa el operador ->
+void cargarDatos(Socio* ptr) {
+
+    cout << "\n--- Carga DE Datos ---" << endl;
+
+    // Se solicita el ID
+    cout << "Ingrese el ID del socio: ";
+    cin >> ptr->id;
+
+    // Limpia el buffer para evitar problemas al leer texto
+    cin.ignore();
+
+    // Se solicita el nombre
+    cout << "Ingrese el nombre del socio: ";
+    cin.getline(ptr->nombre, 50);
+
+    // Se solicita el monto de la cuota
+    cout << "Ingrese el monto de la cuota: ";
+    cin >> ptr->cuota;
 }
+
 int main() {
-// 3. DECLARAR LA ESTRUCTURA
-EntidadProyecto miEntidad;
-cout << "=====================================================" << endl;
-cout << " DESAFIO DE CONTROL DE MODELADO (LPR 5-3) " << endl;
-cout << "=====================================================" << endl;
-// 4. INVOCAR LA FUNCION PASANDO LA DIRECCION DE MEMORIA
-// COMPLETAR: Llama a la funcion 'cargarDatos' pasandole la direccion de 'miEntidad' usando '&'
-// 5. MOSTRAR RESULTADOS Y DIRECCION DE MEMORIA
-cout << "\n=== DATOS VERIFICADOS EN EL SISTEMA ===" << endl;
-cout << "ID Registrado: " << miEntidad.id << endl;
-cout << "Nombre Registrado: " << miEntidad.nombre << endl;
-// COMPLETAR: Imprime el valor de la metrica
-// Imprimimos la direccion física de memoria en hexadecimal
-cout << "Direccion de Memoria RAM (Hexadecimal): " << &miEntidad << endl;
-cout << "=====================================================" << endl;
-return 0;
+
+    // Se crea una variable de tipo Socio
+    Socio miEntidad;
+
+    // Título del programa
+    cout << "=====================================================" << endl;
+    cout << " DESAFIO DE CONTROL DE MODELADO (LPR 5-3) " << endl;
+    cout << "=====================================================" << endl;
+
+    // Se llama a la función enviando la dirección de memoria
+    // del objeto usando el operador &
+    cargarDatos(&miEntidad);
+
+    // Se muestran los datos ingresados
+    cout << "\n=== DATOS VERIFICADOS EN EL SISTEMA ===" << endl;
+    cout << "ID Registrado: " << miEntidad.id << endl;
+    cout << "Nombre Registrado: " << miEntidad.nombre << endl;
+    cout << "Cuota Registrada: $" << miEntidad.cuota << endl;
+
+    // Se muestra la dirección de memoria donde está almacenada la estructura
+    cout << "Direccion de Memoria RAM (Hexadecimal): " << &miEntidad << endl;
+    cout << "=====================================================" << endl;
+
+    return 0; // Finaliza el programa correctamente
 }
